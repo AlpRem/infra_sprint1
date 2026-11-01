@@ -1,0 +1,5 @@
+IP: 51.250.92.122;
+name_taski: https://taskiyan.myftp.biz;
+name_kittygram: https://kittygramyan.servebeer.com;
+login: user;
+password: user;
