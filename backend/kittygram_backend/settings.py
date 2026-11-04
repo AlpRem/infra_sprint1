@@ -1,11 +1,19 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 #SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
-load_dotenv(BASE_DIR / '.env')
+env_path = BASE_DIR / '.env'
+
+if env_path.exists():
+    with open(env_path, encoding='utf-8') as env_file:
+        for line in env_file:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                key, value = line.split('=', 1)
+                os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
 SECRET_KEY = os.getenv(
     'SECRET_KEY',
     'django-insecure-default-key-for-tests'
